@@ -36,10 +36,18 @@ default cek_papan = False
 default cek_saku = False
 default elak_jam = False
 
+init python:
+    def suara_ketik(event, **kwargs):
+        if event == "show":
+            renpy.sound.play("audio/Keyboard.mp3", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.sound.stop()
+
+define n = Character(None, callback=suara_ketik)
 label start:
 
     scene black
-
+    play sound "audio/telepon .mp3"
     n "Terdengar suara getar ponsel di atas permukaan meja kayu yang berulang tiga kali sebelum akhirnya diangkat."
 
     i "Halo, Yan? Maaf Ibu telepon malam malam. Kamu sudah istirahat?"
@@ -50,6 +58,8 @@ label start:
 
     play sound "audio/Kertas_remuk.mp3"
     
+
+    play sound "audio/Kertas_remuk.mp3"
     n "Terdengar suara kertas diremas pelan—amplop pemberitahuan kontrak kerja yang tidak diperpanjang."
 
     r "Bu, kan Rian sudah bilang bulan lalu. Di sini lagi masa penyesuaian proyek besar. Kalau Rian pulang sekarang tanpa bawa hasil apa-apa, mau ditaruh di mana muka Rian? Ibu tunggu saja sampai urusan di sini beres, jangan telepon terus nanyain kapan pulang."
@@ -57,7 +67,7 @@ label start:
     n "Hening selama tiga detik di seberang telepon. Hanya terdengar tarikan napas pelan."
 
     i "Iya, Yan. Maaf ganggu waktumu. Jangan lupa makan malam, ya."
-
+    play sound "audio/telepon_terputus.mp3" 
     n "Sambungan telepon terputus. Suara dengung hening memenuhi ruangan. Terdengar langkah kaki tergesa-gesa, ritsleting koper ditarik cepat, lalu pintu kamar ditutup rapat."
 
     r "Sial... kenapa aku ngomong kayak gitu barusan."
@@ -74,7 +84,7 @@ label start:
     n "Rian duduk menyandar di bangku besi panjang dengan jaket denim lusuh. Di samping kakinya tergeletak sebuah koper hitam."
 
     show boti at posisi_kiri onlayer characters
-
+    
     "Jam dua lewat..."
     "Sebentar. Ini peron berapa? Kok sepi banget?"
 
